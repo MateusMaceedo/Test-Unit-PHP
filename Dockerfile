@@ -4,8 +4,7 @@ WORKDIR /app
 RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \ 
   && pecl install xdebug \
   && docker-php-ext-enable xdebug \
-  && apk del pcre-dev ${PHPIZE_DEPS} \
-  && echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+  && apk del pcre-dev ${PHPIZE_DEPS}
 COPY composer.json .
 COPY composer.phar .
 RUN ./composer.phar install  --prefer-dist --no-scripts --no-autoloader
